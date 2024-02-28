@@ -1,0 +1,39 @@
+<%- include("header") -%>
+        <div class="flex flex-col   items-center  ">
+            <div class="bg-cyan-700 p-4 flex justify-center rounded-md shadow-lg mt-10 mb-7 w-1/4">
+                <h1 class="text-2xl text-white font-semibold"> <%= pageTitle %> </h1>
+            </div>
+            
+            <div class="flex flex-col  bg-white p-4 px-6 h-auto rounded-md shadow-lg mb-10 w-1/4 truncate">
+                <ul class="flex flex-col ">
+                    <% if (anotherItems.length === 0) { %>
+                        <p class="pt-10 pb-10 text-center">Your list appears here.</p>
+                    <% } else { %>
+                        <% anotherItems.forEach(function(item){ %>
+                            <form action="<%= '/' + pageTitle + '/delete' %>" method="post">
+                                <div class="flex text-pink-800   gap-x-3 max-w-xs">
+                                <input type="checkbox" name="checkbox" value="<%= item._id %>" onchange="this.form.submit();" class="appearance-none max-h-1 my-auto p-2 m-1 border border-yellow-500 checked:bg-yellow-500 checked:border-yellow-500">
+                                <p class="strikethrough max-w-sm font-semibold truncate"> <%= item.name %> </p> 
+                                </div>
+                            </form>
+                        <% }); %>
+                            
+                    <% } %>
+                    
+                     
+                </ul>
+    
+                <form action="<%= pageTitle %>" method="post" class="mt-4 flex justify-center items-center">
+                    <input type="text" name = "nextitem" placeholder="New Item" class="bg-slate-300 rounded-md shadow-lg p-1 px-2 border border-slate-700 placeholder-gray-400 truncate" autocomplete="off">
+                    <button id="submitButton" type="submit" name="list" value="<%= pageTitle %>">
+                        <img id="spinIcon" class="w-8 ml-3" src="add-icon.png" alt="">
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+
+        <%- include("footer") -%>        
+        
+        
+    
